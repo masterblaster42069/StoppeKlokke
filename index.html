@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stoppeklokke</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .container {
+        text-align: center;
+        border: 3px solid black
+    }
+
+    #timer {
+        font-size: 2em;
+        margin: 20px 0;
+        border: 2px solid #3498db;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1em;
+        margin: 5px;
+        cursor: pointer;
+        border: none;
+        background-color: #3498db;
+        color: white;
+        border-radius: 4px;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <button id="start" onclick="startTimer()">start</button>
+        <button id="pause" onclick="pauseTimer()">pause</button>
+        <button id="stop" onclick="stopTimer()">stop</button>
+        <div id="timer" class="display">0</div>
+    </div>
+
+    <script>
+        var seconds = 0;
+        var interval;
+// Start timer gjør at den begynner å telle, og siden jeg bruker if (!interval) så vil den ikke legge til intervalen igjen når jeg trykker start
+        function startTimer() {
+            if (!interval) {
+                interval = setInterval(countSeconds, 1000);
+            }
+        }
+//pause timer gjør at den setter timeren på pause
+        function pauseTimer() {
+            clearInterval(interval);
+            interval = null;
+        }
+//stoptimer() stopper da klokken og nullstiller intervalen så at klokken vil vise 0
+        function stopTimer() {
+            clearInterval(interval);
+            interval = null;
+            seconds = 0;
+            document.getElementById("timer").innerHTML = seconds;
+        }
+// countSeconds() er funksjonen som gjør tellingen
+        function countSeconds() {
+            document.getElementById("timer").innerHTML = seconds;
+            seconds++;
+        }
+    </script>
+</body>
+</html>
